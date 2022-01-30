@@ -7,6 +7,7 @@ import java.util.Set;
 public class Comptes {
     @Id
     @Column(unique = true, nullable = false)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     @Column(nullable = false)
     private String password;
@@ -16,8 +17,20 @@ public class Comptes {
     private String email;
     private Boolean locataire;
 
-    @OneToMany(mappedBy = "comptes")
+    @OneToMany(mappedBy = "idCompte")
     private Set<Avis> avis;
+
+    @OneToMany(mappedBy = "idWriter")
+    private Set<Avis> aviswritten;
+
+    @OneToMany(mappedBy = "idPersonne")
+    private Set<Habitations> habitations;
+
+    @OneToMany(mappedBy = "idCompteUtilisateur")
+    private Set<Factures> factures;
+
+    @OneToMany(mappedBy = "idLocataire")
+    private Set<Reservations> reservations;
 
 
 }

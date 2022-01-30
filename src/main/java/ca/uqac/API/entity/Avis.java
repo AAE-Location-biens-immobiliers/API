@@ -1,30 +1,41 @@
 package ca.uqac.API.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Avis {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer idAvis;
-    private Integer idLogement;
     private String commentaire;
     private Integer etoile;
-    private Integer idCompte; // rendu inutile par ce qui est écrit en dessous
-    private Integer idWriter;
+
+    @ManyToOne
+    @JoinColumn(name = "idWriter")
+    private Comptes idWriter;
 
 
     @ManyToOne
-    @JoinColumn(name = "comptes_id",nullable = false)
-    private Comptes comptes;
+    @JoinColumn(name = "idcompte")
+    private Comptes idCompte;
 
-    public Comptes getComptes() { //auto generated
-        return comptes;
+    @ManyToOne
+    @JoinColumn(name = "idlogement")
+    private Habitations idLogement;
+
+    public Habitations getIdLogement() {
+        return idLogement;
     }
 
-    public void setComptes(Comptes comptes) { // auto generated
-        this.comptes = comptes;
+    public void setIdLogement(Habitations idLogement) {
+        this.idLogement = idLogement;
+    }
+
+    public Comptes getIdCompte() {
+        return idCompte;
+    }
+
+    public void setIdCompte(Comptes idCompte) {
+        this.idCompte = idCompte;
     }
 }

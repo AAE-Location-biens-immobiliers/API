@@ -3,10 +3,7 @@ package ca.uqac.API.entity;
 
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +11,8 @@ import java.util.Set;
 @Entity
 public class Habitations {
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer idHabitation;
-    private Integer idPersonne;
     private String description;
     private float longitude;
     private float latitude;
@@ -24,7 +21,6 @@ public class Habitations {
     private Integer code;
     private String rue;
     private String ville;
-    //@Type(type="imageBlob")
     private byte[] photo;
     private Boolean wifi;
     private Boolean lave_linge;
@@ -34,4 +30,22 @@ public class Habitations {
     private Boolean tv;
     private Boolean cuisine;
 
+
+    @ManyToOne
+    @JoinColumn(name = "idpersonne")
+    private Comptes idPersonne;
+
+    @OneToMany(mappedBy = "idHabitation")
+    private Set<Annonces> annonces;
+
+    @OneToMany(mappedBy = "idLogement")
+    private Set<Avis> avis;
+
+    public Comptes getIdPersonne() {
+        return idPersonne;
+    }
+
+    public void setIdPersonne(Comptes idPersonne) {
+        this.idPersonne = idPersonne;
+    }
 }
