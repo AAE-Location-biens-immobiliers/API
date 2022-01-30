@@ -24,8 +24,8 @@ public class Habitations {
     private Integer code;
     private String rue;
     private String ville;
-    @Type(type="imageBlob")
-    private Image photo;
+    //@Type(type="imageBlob")
+    private byte[] photo;
     private Boolean wifi;
     private Boolean lave_linge;
     private Boolean seche_linge;

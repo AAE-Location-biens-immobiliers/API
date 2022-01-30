@@ -1,6 +1,7 @@
 package ca.uqac.API.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Comptes {
@@ -14,6 +15,9 @@ public class Comptes {
     private String tel;
     private String email;
     private Boolean locataire;
+
+    @OneToMany(mappedBy = "comptes")
+    private Set<Avis> avis;
 
 
 }
