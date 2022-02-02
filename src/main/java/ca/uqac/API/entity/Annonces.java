@@ -31,4 +31,52 @@ public class Annonces {
     public void setIdHabitation(Habitations idHabitation) {
         this.idHabitation = idHabitation;
     }
+
+    public Integer getIdAnnonce() {
+        return idAnnonce;
+    }
+
+    public void setIdAnnonce(Integer idAnnonce) {
+        this.idAnnonce = idAnnonce;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getDisponibilite() {
+        return disponibilite;
+    }
+
+    public void setDisponibilite(Date disponibilite) {
+        this.disponibilite = disponibilite;
+    }
+
+    public float getPrix() {
+        return prix;
+    }
+
+    public void setPrix(float prix) {
+        this.prix = prix;
+    }
+
+    public Set<Reservations> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservations> reservations) {
+        this.reservations = reservations;
+    }
+
+    public Set<Disponibilites> getDisponibilites() {
+        return disponibilites;
+    }
+
+    public void setDisponibilites(Set<Disponibilites> disponibilites) {
+        this.disponibilites = disponibilites;
+    }
 }

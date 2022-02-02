@@ -12,6 +12,30 @@ public class Disponibilites {
     private Date fin;
 
 
+    public Integer getIdDisponibilite() {
+        return idDisponibilite;
+    }
+
+    public void setIdDisponibilite(Integer idDisponibilite) {
+        this.idDisponibilite = idDisponibilite;
+    }
+
+    public Date getDebut() {
+        return debut;
+    }
+
+    public void setDebut(Date debut) {
+        this.debut = debut;
+    }
+
+    public Date getFin() {
+        return fin;
+    }
+
+    public void setFin(Date fin) {
+        this.fin = fin;
+    }
+
     @ManyToOne
     @JoinColumn(name = "idannonce")
     private Annonces idAnnonce;

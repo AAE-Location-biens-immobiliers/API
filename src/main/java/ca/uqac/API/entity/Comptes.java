@@ -32,5 +32,99 @@ public class Comptes {
     @OneToMany(mappedBy = "idLocataire")
     private Set<Reservations> reservations;
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getLocataire() {
+        return locataire;
+    }
+
+    public void setLocataire(Boolean locataire) {
+        this.locataire = locataire;
+    }
+
+    public Set<Avis> getAvis() {
+        return avis;
+    }
+
+    public void setAvis(Set<Avis> avis) {
+        this.avis = avis;
+    }
+
+    public Set<Avis> getAviswritten() {
+        return aviswritten;
+    }
+
+    public void setAviswritten(Set<Avis> aviswritten) {
+        this.aviswritten = aviswritten;
+    }
+
+    public Set<Habitations> getHabitations() {
+        return habitations;
+    }
+
+    public void setHabitations(Set<Habitations> habitations) {
+        this.habitations = habitations;
+    }
+
+    public Set<Factures> getFactures() {
+        return factures;
+    }
+
+    public void setFactures(Set<Factures> factures) {
+        this.factures = factures;
+    }
+
+    public Set<Reservations> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservations> reservations) {
+        this.reservations = reservations;
+    }
 }

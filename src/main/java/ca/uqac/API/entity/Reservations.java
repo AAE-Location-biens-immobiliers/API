@@ -40,4 +40,36 @@ public class Reservations {
     public void setIdLocataire(Comptes idLocataire) {
         this.idLocataire = idLocataire;
     }
+
+    public Integer getIdReservation() {
+        return idReservation;
+    }
+
+    public void setIdReservation(Integer idReservation) {
+        this.idReservation = idReservation;
+    }
+
+    public Date getDateReservationDebut() {
+        return dateReservationDebut;
+    }
+
+    public void setDateReservationDebut(Date dateReservationDebut) {
+        this.dateReservationDebut = dateReservationDebut;
+    }
+
+    public Date getDateReservationFin() {
+        return dateReservationFin;
+    }
+
+    public void setDateReservationFin(Date dateReservationFin) {
+        this.dateReservationFin = dateReservationFin;
+    }
+
+    public Set<Factures> getFactures() {
+        return factures;
+    }
+
+    public void setFactures(Set<Factures> factures) {
+        this.factures = factures;
+    }
 }

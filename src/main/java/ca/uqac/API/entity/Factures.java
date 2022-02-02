@@ -9,6 +9,22 @@ public class Factures {
     private Integer idFactures;
     private Integer idPaiement;
 
+    public Integer getIdFactures() {
+        return idFactures;
+    }
+
+    public void setIdFactures(Integer idFactures) {
+        this.idFactures = idFactures;
+    }
+
+    public Integer getIdPaiement() {
+        return idPaiement;
+    }
+
+    public void setIdPaiement(Integer idPaiement) {
+        this.idPaiement = idPaiement;
+    }
+
     @ManyToOne
     @JoinColumn(name = "idcompteutilisateur")
     private Comptes idCompteUtilisateur;

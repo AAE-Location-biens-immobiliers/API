@@ -38,4 +38,36 @@ public class Avis {
     public void setIdCompte(Comptes idCompte) {
         this.idCompte = idCompte;
     }
+
+    public Integer getIdAvis() {
+        return idAvis;
+    }
+
+    public void setIdAvis(Integer idAvis) {
+        this.idAvis = idAvis;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public Integer getEtoile() {
+        return etoile;
+    }
+
+    public void setEtoile(Integer etoile) {
+        this.etoile = etoile;
+    }
+
+    public Comptes getIdWriter() {
+        return idWriter;
+    }
+
+    public void setIdWriter(Comptes idWriter) {
+        this.idWriter = idWriter;
+    }
 }
