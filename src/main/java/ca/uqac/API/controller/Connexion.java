@@ -24,11 +24,6 @@ public class Connexion {
         return "Saved";
     }
 
-    @PostMapping("/validate_connection")
-    public void ValidateConnection(@RequestBody String string){
-
-    }
-
     @GetMapping("validate_connection/{identifiant}/{password}")
     public ResponseEntity<Comptes> ValidateConnection(@PathVariable String identifiant,@PathVariable String password) {
         try {
