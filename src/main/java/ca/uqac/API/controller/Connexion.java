@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080/api")
-@RequestMapping("/login")
+@RequestMapping("/connexion")
 public class Connexion {
     @Autowired
     connexionService connexionService;
@@ -24,8 +24,8 @@ public class Connexion {
         return "Saved";
     }
 
-    @GetMapping("validate_connection/{identifiant}/{password}")
-    public ResponseEntity<Comptes> ValidateConnection(@PathVariable String identifiant,@PathVariable String password) {
+    @GetMapping("/login")
+    public ResponseEntity<Comptes> ValidateConnection(@RequestParam("identifiant") String identifiant, @RequestParam("password") String password) {
         try {
             Comptes comptes = connexionService.getCompte(identifiant, password);
             return new ResponseEntity<>(comptes, HttpStatus.OK);
