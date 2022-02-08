@@ -23,10 +23,10 @@ public class connexionService {
         connexionRepository.save(comptes);
     }
 
-    public Comptes getCompte(String identifiant, String password) throws NoSuchElementException {
+    public Comptes getCompte(String email, String password) throws NoSuchElementException {
         Iterator<Comptes> compteIterator = StreamSupport
                 .stream(connexionRepository.findAll().spliterator(), false)
-                .filter(c -> c.getEmail().equals(identifiant) && c.getPassword().equals(password))
+                .filter(c -> c.getEmail().equals(email) && c.getPassword().equals(password))
                 .iterator();
         if (compteIterator.hasNext()){
             return compteIterator.next();

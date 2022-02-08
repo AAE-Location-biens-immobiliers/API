@@ -30,13 +30,15 @@ public class Connexion {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<Comptes> ValidateConnection(@RequestParam("identifiant") String identifiant, @RequestParam("password") String password) {
+    public ResponseEntity<Comptes> ValidateConnection(@RequestParam("email") String email, @RequestParam("password") String password) {
         try {
-            Comptes comptes = connexionService.getCompte(identifiant, password);
+            Comptes comptes = connexionService.getCompte(email, password);
             comptes.setPassword("");
             return new ResponseEntity<>(comptes, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -46,7 +48,9 @@ public class Connexion {
             comptes.setId(id);
             connexionService.saveCompte(comptes);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (NoSuchElementException e) {
+        }  catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

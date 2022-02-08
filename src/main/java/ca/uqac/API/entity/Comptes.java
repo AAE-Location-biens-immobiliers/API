@@ -9,7 +9,6 @@ public class Comptes {
     @Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String identifiant;
     @Column(nullable = false)
     private String password;
     private String nom;
@@ -128,13 +127,5 @@ public class Comptes {
 
     public void setReservations(Set<Reservations> reservations) {
         this.reservations = reservations;
-    }
-
-    public String getIdentifiant() {
-        return identifiant;
-    }
-
-    public void setIdentifiant(String identifiant) {
-        this.identifiant = identifiant;
     }
 }
