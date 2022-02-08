@@ -10,7 +10,10 @@ public class Disponibilites {
     private Integer idDisponibilite;
     private Date debut;
     private Date fin;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "idannonce")
+    private Annonces idAnnonce;
 
     public Integer getIdDisponibilite() {
         return idDisponibilite;
@@ -35,10 +38,6 @@ public class Disponibilites {
     public void setFin(Date fin) {
         this.fin = fin;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "idannonce")
-    private Annonces idAnnonce;
 
     public Annonces getIdAnnonce() {
         return idAnnonce;
