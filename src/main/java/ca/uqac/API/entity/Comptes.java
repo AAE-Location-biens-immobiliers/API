@@ -1,6 +1,5 @@
 package ca.uqac.API.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,10 +27,9 @@ public class Comptes {
     private Set<Avis> avis;
 
     @OneToMany(mappedBy = "idWriter")
-    private Set<Avis> aviswritten;
+    private Set<Avis> avisWritten;
 
     @OneToMany(mappedBy = "idPersonne")
-    @JsonIgnore
     private Set<Habitations> habitations;
 
     @OneToMany(mappedBy = "idCompteUtilisateur")
