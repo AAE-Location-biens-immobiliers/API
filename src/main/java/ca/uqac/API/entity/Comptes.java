@@ -7,15 +7,15 @@ import java.util.Set;
 public class Comptes {
     @Id
     @Column(unique = true, nullable = false)
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(unique = true, nullable = false)
     private String identifiant;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String password;
     private String nom;
     private String prenom;
     private String tel;
+    @Column(unique = true, nullable = false)
     private String email;
     private Boolean locataire;
 

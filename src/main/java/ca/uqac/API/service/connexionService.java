@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,6 +15,7 @@ import java.util.stream.StreamSupport;
 @Service
 @Transactional
 public class connexionService {
+
     @Autowired
     private ConnexionRepository connexionRepository;
 
@@ -21,10 +23,10 @@ public class connexionService {
         connexionRepository.save(comptes);
     }
 
-    public Comptes getCompte(String identifiant, String password ) throws NoSuchElementException {
+    public Comptes getCompte(String identifiant, String password) throws NoSuchElementException {
         Iterator<Comptes> compteIterator = StreamSupport
                 .stream(connexionRepository.findAll().spliterator(), false)
-                .filter(c -> c.getIdentifiant().equals(identifiant) && c.getPassword().equals(password))
+                .filter(c -> c.getEmail().equals(identifiant) && c.getPassword().equals(password))
                 .iterator();
         if (compteIterator.hasNext()){
             return compteIterator.next();
