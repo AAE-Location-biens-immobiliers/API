@@ -1,7 +1,7 @@
 package ca.uqac.API.controller;
 
 import ca.uqac.API.entity.Comptes;
-import ca.uqac.API.service.connexionService;
+import ca.uqac.API.service.ConnexionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -13,12 +13,12 @@ import java.util.NoSuchElementException;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("/api/connexion")
-public class Connexion {
+public class ConnexionController {
     @Autowired
-    connexionService connexionService;
+    private ConnexionService connexionService;
 
     @PostMapping("/register")
-    public ResponseEntity add(@RequestBody Comptes comptes) {
+    public ResponseEntity<?> add(@RequestBody Comptes comptes) {
         try {
             connexionService.saveCompte(comptes);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -35,8 +35,8 @@ public class Connexion {
             Comptes comptes = connexionService.getCompte(email, password);
             comptes.setPassword("");
             return new ResponseEntity<>(comptes, HttpStatus.OK);
-        } catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

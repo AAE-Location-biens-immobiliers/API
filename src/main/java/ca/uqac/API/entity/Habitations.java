@@ -1,14 +1,16 @@
 package ca.uqac.API.entity;
 
-
-import org.hibernate.annotations.Type;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.awt.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 public class Habitations {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -30,8 +32,7 @@ public class Habitations {
     private Boolean tv;
     private Boolean cuisine;
 
-
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "idpersonne")
     private Comptes idPersonne;
 
@@ -41,7 +42,7 @@ public class Habitations {
     @OneToMany(mappedBy = "idLogement")
     private Set<Avis> avis;
 
-    public Comptes getIdPersonne() {
+    /*public Comptes getIdPersonne() {
         return idPersonne;
     }
 
@@ -199,5 +200,5 @@ public class Habitations {
 
     public void setAvis(Set<Avis> avis) {
         this.avis = avis;
-    }
+    }*/
 }

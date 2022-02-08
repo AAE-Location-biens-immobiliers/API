@@ -2,7 +2,6 @@ package ca.uqac.API.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.time.DateTimeException;
 import java.util.Set;
 
 @Entity
