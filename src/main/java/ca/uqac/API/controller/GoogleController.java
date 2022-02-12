@@ -16,7 +16,8 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("/api/google")
-public class Google {
+public class GoogleController {
+
     @GetMapping("/autocomplete")
     public ResponseEntity<Comptes> AutoComplete(@RequestParam("input") String input, @RequestParam("key") String apiKey, @RequestParam("language") String lang) {
         try {
