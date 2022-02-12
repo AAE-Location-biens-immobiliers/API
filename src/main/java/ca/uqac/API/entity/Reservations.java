@@ -1,5 +1,6 @@
 package ca.uqac.API.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@JsonIgnoreProperties({"factures", "idLocataire", "idAnnonce"})
 public class Reservations {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -19,7 +21,6 @@ public class Reservations {
 
     @OneToMany(mappedBy = "idReservation")
     private Set<Factures> factures;
-
 
     @ManyToOne
     @JoinColumn(name = "idlocataire")

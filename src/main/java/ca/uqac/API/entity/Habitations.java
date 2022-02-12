@@ -1,5 +1,6 @@
 package ca.uqac.API.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@JsonIgnoreProperties({"idPersonne", "annonces", "avis"})
 public class Habitations {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
