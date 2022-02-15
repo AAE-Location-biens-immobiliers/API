@@ -29,4 +29,5 @@ public class Avis {
     @ManyToOne
     @JoinColumn(name = "idlogement")
     private Habitations idLogement;
+
 }

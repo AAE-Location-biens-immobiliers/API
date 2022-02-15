@@ -7,6 +7,7 @@
 ###################
 #Comptes
 ###################
+
 USE db_sharaloc;
 INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire) VALUES('1', 'roger_password', 'Des Jardins', 'Roger', '0675348654', 'roger.desjardins@yahoo.fr', true);
 INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire) VALUES('2', 'albert_password', 'Laurent', 'Albert', '0756431850', 'albert.laurent@yahoo.fr', true);

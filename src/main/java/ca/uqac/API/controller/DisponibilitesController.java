@@ -1,9 +1,9 @@
 package ca.uqac.API.controller;
 
 import ca.uqac.API.entity.Annonces;
-import ca.uqac.API.entity.Avis;
-import ca.uqac.API.entity.Habitations;
-import ca.uqac.API.service.HabitationsService;
+import ca.uqac.API.entity.Disponibilites;
+import ca.uqac.API.service.AnnoncesService;
+import ca.uqac.API.service.DisponibilitesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -14,16 +14,15 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
-@RequestMapping("/api/habitations")
-public class HabitationsController {
-
+@RequestMapping("/api/disponibilites")
+public class DisponibilitesController {
     @Autowired
-    private HabitationsService habitationsService;
+    private DisponibilitesService disponibilitesServices;
 
     @PostMapping("/register")
-    public ResponseEntity<?> add(@RequestBody Habitations habitation) {
+    public ResponseEntity<?> add(@RequestBody Disponibilites disponibilites) {
         try {
-            habitationsService.saveHabitation(habitation);
+            disponibilitesServices.saveDisponibilites(disponibilites);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -32,14 +31,13 @@ public class HabitationsController {
         }
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<Habitations>> getAll(@RequestParam("id") int userId) {
+    @GetMapping("/")
+    public ResponseEntity<List<Annonces>> getAnnounceForDisponibility (@RequestBody Disponibilites disponibility) {
         try {
-            List<Habitations> habitations = habitationsService.getAllWithUserId(userId);
-            return ResponseEntity.ok(habitations);
+            List<Annonces> announces = disponibilitesServices.getAllAnnounceWithDisponibility(disponibility);
+            return ResponseEntity.ok(announces);
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 }

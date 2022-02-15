@@ -2,28 +2,29 @@ package ca.uqac.API.controller;
 
 import ca.uqac.API.entity.Annonces;
 import ca.uqac.API.entity.Avis;
-import ca.uqac.API.entity.Habitations;
-import ca.uqac.API.service.HabitationsService;
+import ca.uqac.API.entity.Comptes;
+import ca.uqac.API.entity.Disponibilites;
+import ca.uqac.API.service.AnnoncesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
-@RequestMapping("/api/habitations")
-public class HabitationsController {
+@RequestMapping("/api/annonces")
+public class AnnoncesController {
 
     @Autowired
-    private HabitationsService habitationsService;
+    private AnnoncesService annoncesService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> add(@RequestBody Habitations habitation) {
+    public ResponseEntity<?> add(@RequestBody Annonces annonces) {
         try {
-            habitationsService.saveHabitation(habitation);
+            annoncesService.saveAnnonce(annonces);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -32,11 +33,11 @@ public class HabitationsController {
         }
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<Habitations>> getAll(@RequestParam("id") int userId) {
+    @GetMapping("/avis")
+    public ResponseEntity<List<Avis>> getAvisFromOneIdAnnounce (@RequestParam("idAnnounce") int idAnnounce) {
         try {
-            List<Habitations> habitations = habitationsService.getAllWithUserId(userId);
-            return ResponseEntity.ok(habitations);
+            Set<Avis> avis = annoncesService.getAllAvisWithIdAnnounce(idAnnounce);
+            return ResponseEntity.ok(avis.stream().toList());
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -17,7 +17,6 @@ public class Annonces {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer idAnnonce;
     private String description;
-    private Date disponibilite;
     private float prix;
 
 

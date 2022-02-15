@@ -23,6 +23,7 @@ public class Habitations {
     private Integer code;
     private String rue;
     private String ville;
+    private int nombrePlace;
     private byte[] photo;
     private Boolean wifi;
     private Boolean lave_linge;
