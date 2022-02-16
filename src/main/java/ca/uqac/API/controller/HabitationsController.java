@@ -64,4 +64,28 @@ public class HabitationsController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("")
+    public ResponseEntity<?> postHabitation(@RequestBody HashMap<String, Object> body, @RequestParam("idPersonne") int idPersonne) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            final Habitations habitation = mapper.readValue(new Gson().toJson(body.get("habitation")), Habitations.class);
+
+            final String photoBase64 = (String) body.get("photo");
+            if (photoBase64 != null) {
+                final byte [] photo = Base64Utils.base64ToByteArray(photoBase64);
+                if(photo.length > 2000000) throw new DataIntegrityViolationException("");
+                habitation.setPhoto(photo);
+            }
+
+
+
+            final Habitations hab = habitationsService.ajouterHabitation(habitation, idPersonne);
+            return ResponseEntity.ok(hab);
+        } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>(HttpStatus.PAYLOAD_TOO_LARGE);
+        } catch (Exception ignored) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

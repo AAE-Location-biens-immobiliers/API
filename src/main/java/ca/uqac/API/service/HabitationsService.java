@@ -1,5 +1,6 @@
 package ca.uqac.API.service;
 
+import ca.uqac.API.entity.Comptes;
 import ca.uqac.API.entity.Habitations;
 import ca.uqac.API.repository.HabitationsRepository;
 import org.jetbrains.annotations.NotNull;
@@ -38,5 +39,12 @@ public class HabitationsService {
 
     public void deleteById(int id) {
         habitationsRepository.deleteById(id);
+    }
+
+    public Habitations ajouterHabitation(Habitations habitation, int idPersonne) {
+        final Comptes personne = new Comptes();
+        personne.setId(idPersonne);
+        habitation.setIdPersonne(personne);
+        return habitationsRepository.save(habitation);
     }
 }
