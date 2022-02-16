@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -29,14 +30,6 @@ public class HabitationsService {
                 .stream(habitationsRepository.findAll().spliterator(), false)
                 .filter(e -> e.getIdPersonne().getId() == userId)
                 .toList();
-    }
-
-    public List<Annonces> getAllAnnoncesWithIdHabitation(int idHabitations) throws Exception {
-        Optional<Habitations> habitation = habitationsRepository.findById(idHabitations);
-        if (habitation.isEmpty()){
-            throw new Exception();
-        }
-        return habitation.get().getAnnonces().stream().toList();
     }
 
     public void modifierHabitation(@NotNull Habitations h) throws Exception {
@@ -59,5 +52,13 @@ public class HabitationsService {
         personne.setId(idPersonne);
         habitation.setIdPersonne(personne);
         return habitationsRepository.save(habitation);
+    }
+
+    public List<Annonces> getAllAnnoncesWithIdHabitation(int idHabitations) throws Exception {
+        Optional<Habitations> habitation = habitationsRepository.findById(idHabitations);
+        if (habitation.isEmpty()){
+            throw new Exception();
+        }
+        return habitation.get().getAnnonces().stream().toList();
     }
 }
