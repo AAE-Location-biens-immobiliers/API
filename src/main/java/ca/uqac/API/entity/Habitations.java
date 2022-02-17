@@ -3,6 +3,7 @@ package ca.uqac.API.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,13 +17,15 @@ public class Habitations {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer idHabitation;
     private String description;
-    private float longitude;
-    private float latitude;
+    private double longitude;
+    private double latitude;
     private String pays;
     private Integer numero;
     private Integer code;
     private String rue;
     private String ville;
+    @Lob
+    @Column(columnDefinition="MEDIUMBLOB", length = 2000000)
     private byte[] photo;
     private Boolean wifi;
     private Boolean lave_linge;
@@ -36,7 +39,7 @@ public class Habitations {
     @JoinColumn(name = "id_personne")
     private Comptes idPersonne;
 
-    @OneToMany(mappedBy = "idHabitation")
+    @OneToMany(mappedBy = "idHabitation", cascade = CascadeType.ALL)
     private Set<Annonces> annonces;
 
     @OneToMany(mappedBy = "idLogement")
