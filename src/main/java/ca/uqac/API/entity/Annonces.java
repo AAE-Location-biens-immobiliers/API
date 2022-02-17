@@ -20,7 +20,6 @@ public class Annonces {
     private Date disponibilite;
     private float prix;
 
-
     @OneToMany(mappedBy = "idAnnonce")
     private Set<Reservations> reservations;
 
