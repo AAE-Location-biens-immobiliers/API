@@ -20,10 +20,10 @@ public class Annonces {
     private float prix;
     private int nombrePlace;
 
-    @OneToMany(mappedBy = "idAnnonce")
+    @OneToMany(mappedBy = "idAnnonce",cascade = CascadeType.ALL)
     private Set<Reservations> reservations;
 
-    @OneToMany(mappedBy = "idAnnonce")
+    @OneToMany(mappedBy = "idAnnonce", cascade = CascadeType.ALL)
     private Set<Disponibilites> disponibilites;
 
     @ManyToOne

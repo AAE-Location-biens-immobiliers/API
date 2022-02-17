@@ -1,7 +1,7 @@
 package ca.uqac.API.controller;
 
 import ca.uqac.API.entity.Comptes;
-import ca.uqac.API.service.ConnexionService;
+import ca.uqac.API.service.CompteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -13,14 +13,14 @@ import java.util.NoSuchElementException;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("/api/connexion")
-public class ConnexionController {
+public class CompteController {
     @Autowired
-    private ConnexionService connexionService;
+    private CompteService compteService;
 
     @PostMapping("/register")
     public ResponseEntity<?> add(@RequestBody Comptes comptes) {
         try {
-            connexionService.saveCompte(comptes);
+            compteService.saveCompte(comptes);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -32,7 +32,7 @@ public class ConnexionController {
     @GetMapping("/login")
     public ResponseEntity<Comptes> ValidateConnection(@RequestParam("email") String email, @RequestParam("password") String password) {
         try {
-            Comptes comptes = connexionService.getCompte(email, password);
+            Comptes comptes = compteService.getCompte(email, password);
             comptes.setPassword("");
             return new ResponseEntity<>(comptes, HttpStatus.OK);
         } catch (NoSuchElementException e) {
@@ -42,11 +42,10 @@ public class ConnexionController {
         }
     }
 
-    @PutMapping("update/{id}")
-    public ResponseEntity<?> update(@RequestBody Comptes comptes, @PathVariable Integer id) {
+    @PutMapping("/update")
+    public ResponseEntity<?> update(@RequestBody Comptes comptes) {
         try {
-            comptes.setId(id);
-            connexionService.saveCompte(comptes);
+            compteService.updateAnnonce(comptes);
             return new ResponseEntity<>(HttpStatus.OK);
         }  catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -54,8 +53,9 @@ public class ConnexionController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @DeleteMapping("/{id}")
     public void deleteAccount(@PathVariable Integer id) {
-        connexionService.deleteCompte(id);
+        compteService.deleteCompte(id);
     }
 }

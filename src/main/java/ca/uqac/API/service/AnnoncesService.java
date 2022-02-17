@@ -41,4 +41,19 @@ public class AnnoncesService {
                 .filter(a -> a.getIdHabitation().getVille().equals(ville))
                 .toList();
     }
+
+    public void deleteAnnonce(Integer id) {
+        annoncesRepository.deleteById(id);
+    }
+
+    public void updateAnnonce(Annonces updateAnnounce) throws Exception {
+        Optional<Annonces> annonce = annoncesRepository.findById(updateAnnounce.getIdAnnonce());
+        if(annonce.isEmpty()){
+            throw new Exception();
+        }
+        updateAnnounce.setDisponibilites(annonce.get().getDisponibilites());
+        updateAnnounce.setReservations((annonce.get().getReservations()));
+        updateAnnounce.setIdHabitation(annonce.get().getIdHabitation());
+        saveAnnonce(updateAnnounce);
+    }
 }

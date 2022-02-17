@@ -16,4 +16,8 @@ public class AvisService {
     public void saveAvis(Avis avis){
         avisRepository.save(avis);
     }
+
+    public void deleteOneAvis(Integer id) {
+        avisRepository.deleteById(id);
+    }
 }

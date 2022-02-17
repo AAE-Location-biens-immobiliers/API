@@ -26,4 +26,10 @@ public class AvisController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteAccount(@PathVariable Integer id) {
+        avisService .deleteOneAvis(id);
+    }
+
 }

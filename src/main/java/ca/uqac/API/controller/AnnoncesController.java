@@ -64,5 +64,20 @@ public class AnnoncesController {
         }
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<?> updateAnnonce(@RequestBody Annonces annonces){
+        try {
+            annoncesService.updateAnnonce(annonces);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }  catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
+    @DeleteMapping("/{id}")
+    public void deleteAnnonce(@PathVariable Integer id) {
+        annoncesService .deleteAnnonce(id);
+    }
 }
