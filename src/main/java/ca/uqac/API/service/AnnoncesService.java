@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -59,5 +60,17 @@ public class AnnoncesService {
                 .stream(annoncesRepository.findAll().spliterator(), false)
                 .filter(a -> a.getIdHabitation().getIdPersonne().getId() == id)
                 .toList();
+    }
+
+    public List<Annonces> getAll() {
+        List<Annonces> all = new LinkedList<>();
+        annoncesRepository.findAll().forEach(all::add);
+        return all;
+    }
+
+    public Annonces getById(int id) {
+        Optional<Annonces> find = annoncesRepository.findById(id);
+        if(find.isEmpty()) return null;
+        return find.get();
     }
 }

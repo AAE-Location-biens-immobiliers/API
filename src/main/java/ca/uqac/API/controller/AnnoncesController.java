@@ -21,7 +21,7 @@ public class AnnoncesController {
     @Autowired
     private AnnoncesService annoncesService;
 
-    @PostMapping("/register")
+    @PostMapping("")
     public ResponseEntity<?> add(@RequestBody Annonces annonces) {
         try {
             annoncesService.saveAnnonce(annonces);
@@ -42,6 +42,7 @@ public class AnnoncesController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 
     @GetMapping("/search")
     public ResponseEntity<List<Annonces>> getAnnoncesSearch (@RequestParam(value = "ville") String ville, @RequestParam(value = "debut",required = false) Date debut, @RequestParam(value = "fin",required = false) Date fin, @RequestParam(value = "nbPersonne",required = false) Integer nbPersonne){
