@@ -18,7 +18,7 @@ public class Annonces {
     private Integer idAnnonce;
     private String description;
     private float prix;
-
+    private int nombrePlace;
 
     @OneToMany(mappedBy = "idAnnonce")
     private Set<Reservations> reservations;

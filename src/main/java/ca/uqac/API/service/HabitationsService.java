@@ -42,13 +42,4 @@ public class HabitationsService {
         }
         return habitation.get().getAnnonces().stream().toList();
     }
-
-    public List<Annonces> getAllHabitationsForSearchTool(String pays, int nbPlace){
-        return StreamSupport
-                .stream(habitationsRepository.findAll().spliterator(), false)
-                .filter(e -> e.getPays().equals(pays) && e.getNombrePlace() == nbPlace)
-                .flatMap(e -> e.getAnnonces().stream())
-                .collect(Collectors.toList());
-
-    }
 }

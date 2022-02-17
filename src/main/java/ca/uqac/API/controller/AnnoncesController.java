@@ -10,8 +10,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -42,5 +45,24 @@ public class AnnoncesController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Annonces>> getAnnoncesSearch (@RequestParam(value = "ville") String ville, @RequestParam(value = "debut",required = false)Date debut, @RequestParam(value = "fin",required = false)Date fin, @RequestParam(value = "nbPersonne",required = false) Integer nbPersonne){
+        try {
+            List<Annonces> annonces = annoncesService.search(ville);
+            if (debut != null && fin != null){
+                annonces = annonces.stream()
+                        .filter(a -> a.getDisponibilites().stream().anyMatch(d -> d.getDebut().equals(debut) && d.getFin().equals(fin)))
+                        .toList();
+            }
+            if(nbPersonne != null){
+                annonces = annonces.stream().filter(a -> a.getNombrePlace() == nbPersonne).toList();
+            }
+            return ResponseEntity.ok(annonces);
+        } catch (Exception ignored) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
