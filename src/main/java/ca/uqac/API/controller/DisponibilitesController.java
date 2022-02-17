@@ -2,7 +2,6 @@ package ca.uqac.API.controller;
 
 import ca.uqac.API.entity.Annonces;
 import ca.uqac.API.entity.Disponibilites;
-import ca.uqac.API.service.AnnoncesService;
 import ca.uqac.API.service.DisponibilitesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

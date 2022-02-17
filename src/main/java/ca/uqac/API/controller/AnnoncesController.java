@@ -2,8 +2,6 @@ package ca.uqac.API.controller;
 
 import ca.uqac.API.entity.Annonces;
 import ca.uqac.API.entity.Avis;
-import ca.uqac.API.entity.Comptes;
-import ca.uqac.API.entity.Disponibilites;
 import ca.uqac.API.service.AnnoncesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")

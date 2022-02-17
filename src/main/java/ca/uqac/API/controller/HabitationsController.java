@@ -1,21 +1,16 @@
 package ca.uqac.API.controller;
 
-import ca.uqac.API.entity.Annonces;
-import ca.uqac.API.entity.Avis;
-import ca.uqac.API.entity.Disponibilites;
 import ca.uqac.API.entity.Habitations;
 import ca.uqac.API.service.HabitationsService;
 import ca.uqac.API.utils.Base64Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
