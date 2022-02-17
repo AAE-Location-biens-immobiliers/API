@@ -56,4 +56,11 @@ public class AnnoncesService {
         updateAnnounce.setIdHabitation(annonce.get().getIdHabitation());
         saveAnnonce(updateAnnounce);
     }
+
+    public List<Annonces> getAllAnnoncesWithIdUser(int id) {
+        return StreamSupport
+                .stream(annoncesRepository.findAll().spliterator(), false)
+                .filter(a -> a.getIdHabitation().getIdPersonne().getId() == id)
+                .toList();
+    }
 }

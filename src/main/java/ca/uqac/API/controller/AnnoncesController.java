@@ -76,6 +76,18 @@ public class AnnoncesController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Annonces>> getAllAnnoncesForIdUser(@RequestParam("id") int id){
+        try {
+            List<Annonces> annonces = annoncesService.getAllAnnoncesWithIdUser(id);
+            return ResponseEntity.ok(annonces);
+        }  catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public void deleteAnnonce(@PathVariable Integer id) {
         annoncesService .deleteAnnonce(id);
