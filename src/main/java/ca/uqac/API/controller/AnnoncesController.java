@@ -34,7 +34,7 @@ public class AnnoncesController {
     }
 
     @GetMapping("/avis")
-    public ResponseEntity<List<Avis>> getAvisFromOneIdAnnounce (@RequestParam("idAnnounce") int idAnnounce) {
+    public ResponseEntity<List<Avis>> getAvisFromOneIdAnnounce(@RequestParam("idAnnounce") int idAnnounce) {
         try {
             Set<Avis> avis = annoncesService.getAllAvisWithIdAnnounce(idAnnounce);
             return ResponseEntity.ok(avis.stream().toList());

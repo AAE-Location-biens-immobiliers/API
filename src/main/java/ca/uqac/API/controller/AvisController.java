@@ -15,8 +15,8 @@ public class AvisController {
     @Autowired
     private AvisService avisService;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> save(@RequestBody Avis avis, @RequestParam(value = "idCompte",required = false) Integer idCompte, @RequestParam("idWriter") int idWriter, @RequestParam(value = "idlogement",required = false) Integer idlogement) {
+    @PostMapping("")
+    public ResponseEntity<?> add(@RequestBody Avis avis, @RequestParam(value = "idCompte",required = false) Integer idCompte, @RequestParam("idWriter") int idWriter, @RequestParam(value = "idlogement",required = false) Integer idlogement) {
         try{
             avisService.saveAvis(avis, idCompte, idWriter, idlogement);
             return new ResponseEntity<>(HttpStatus.OK);
