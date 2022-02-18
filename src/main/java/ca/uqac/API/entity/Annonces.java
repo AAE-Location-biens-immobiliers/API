@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@JsonIgnoreProperties({"reservations", "disponibilites", "idHabitation"})
+@JsonIgnoreProperties()
 public class Annonces {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,6 +18,7 @@ public class Annonces {
     private String description;
     private float prix;
     private int nombrePlace;
+    private String type;
 
     @OneToMany(mappedBy = "idAnnonce",cascade = CascadeType.ALL)
     private Set<Reservations> reservations;

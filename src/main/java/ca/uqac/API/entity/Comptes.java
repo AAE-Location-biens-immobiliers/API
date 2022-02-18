@@ -24,6 +24,9 @@ public class Comptes {
     @Column(unique = true, nullable = false)
     private String email;
     private Boolean locataire;
+    @Lob
+    @Column(columnDefinition="MEDIUMBLOB", length = 2000000)
+    private byte[] photo;
 
     @OneToMany(mappedBy = "idCompte")
     private Set<Avis> avis;

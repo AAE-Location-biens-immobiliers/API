@@ -44,7 +44,7 @@ public class AnnoncesController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Annonces>> getAnnoncesSearch (@RequestParam(value = "ville") String ville, @RequestParam(value = "debut",required = false)Date debut, @RequestParam(value = "fin",required = false)Date fin, @RequestParam(value = "nbPersonne",required = false) Integer nbPersonne){
+    public ResponseEntity<List<Annonces>> getAnnoncesSearch (@RequestParam(value = "ville") String ville, @RequestParam(value = "debut",required = false) Date debut, @RequestParam(value = "fin",required = false) Date fin, @RequestParam(value = "nbPersonne",required = false) Integer nbPersonne){
         try {
             List<Annonces> annonces = annoncesService.search(ville);
             if (debut != null && fin != null){
@@ -61,7 +61,7 @@ public class AnnoncesController {
         }
     }
 
-    @PutMapping("/update")
+    @PutMapping("")
     public ResponseEntity<?> updateAnnonce(@RequestBody Annonces annonces){
         try {
             annoncesService.updateAnnonce(annonces);
@@ -73,7 +73,7 @@ public class AnnoncesController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("")
     public ResponseEntity<List<Annonces>> getAllAnnoncesForIdUser(@RequestParam("id") int id){
         try {
             List<Annonces> annonces = annoncesService.getAllAnnoncesWithIdUser(id);
@@ -85,8 +85,10 @@ public class AnnoncesController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteAnnonce(@PathVariable Integer id) {
-        annoncesService .deleteAnnonce(id);
+    @DeleteMapping("")
+    public void deleteAnnonce(@RequestParam("id") Integer id) {
+        annoncesService.deleteAnnonce(id);
     }
 }
+
+
