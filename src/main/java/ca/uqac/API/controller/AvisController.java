@@ -16,10 +16,10 @@ public class AvisController {
     private AvisService avisService;
 
     @PostMapping("")
-    public ResponseEntity<?> add(@RequestBody Avis avis, @RequestParam(value = "idCompte",required = false) Integer idCompte, @RequestParam("idWriter") int idWriter, @RequestParam(value = "idlogement",required = false) Integer idlogement) {
+    public ResponseEntity<?> add(@RequestBody Avis avis, @RequestParam(value = "idCompte",required = false) Integer idCompte, @RequestParam("idWriter") int idWriter, @RequestParam(value = "idLogement",required = false) Integer idLogement) {
         try{
-            avisService.saveAvis(avis, idCompte, idWriter, idlogement);
-            return new ResponseEntity<>(HttpStatus.OK);
+            Avis newAvis = avisService.saveAvis(avis, idCompte, idWriter, idLogement);
+            return ResponseEntity.ok(newAvis);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (Exception e) {
@@ -27,9 +27,9 @@ public class AvisController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteAccount(@PathVariable Integer id) {
-        avisService .deleteOneAvis(id);
+    @DeleteMapping("")
+    public void deleteAccount(@RequestParam("id") Integer id) {
+        avisService.deleteOneAvis(id);
     }
 
 }

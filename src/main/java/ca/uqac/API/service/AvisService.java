@@ -16,7 +16,7 @@ public class AvisService {
     @Autowired
     private AvisRepository avisRepository;
 
-    public void saveAvis(Avis avis, Integer idCompte, int idWriter, Integer idLogement) {
+    public Avis saveAvis(Avis avis, Integer idCompte, int idWriter, Integer idLogement) {
 
         if (idCompte != null) {
             Comptes compte = new Comptes();
@@ -34,7 +34,7 @@ public class AvisService {
         compteWriter.setId(idWriter);
 
         avis.setIdWriter(compteWriter);
-        avisRepository.save(avis);
+        return avisRepository.save(avis);
     }
 
     public void deleteOneAvis(Integer id) {
