@@ -16,9 +16,9 @@ public class AvisController {
     private AvisService avisService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> add(@RequestBody Avis avis) {
+    public ResponseEntity<?> save(@RequestBody Avis avis, @RequestParam(value = "idCompte",required = false) Integer idCompte, @RequestParam("idWriter") int idWriter, @RequestParam(value = "idlogement",required = false) Integer idlogement) {
         try{
-            avisService.saveAvis(avis);
+            avisService.saveAvis(avis, idCompte, idWriter, idlogement);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);

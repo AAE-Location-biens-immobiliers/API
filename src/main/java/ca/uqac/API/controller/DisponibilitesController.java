@@ -19,9 +19,9 @@ public class DisponibilitesController {
     private DisponibilitesService disponibilitesServices;
 
     @PostMapping("/register")
-    public ResponseEntity<?> add(@RequestBody Disponibilites disponibilites) {
+    public ResponseEntity<?> save(@RequestBody Disponibilites disponibilites, @RequestParam("idAnnonce") int idAnnonce) {
         try {
-            disponibilitesServices.saveDisponibilites(disponibilites);
+            disponibilitesServices.saveDisponibilites(disponibilites, idAnnonce);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);

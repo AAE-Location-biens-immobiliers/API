@@ -21,7 +21,6 @@ public class Avis {
     @JoinColumn(name = "idWriter")
     private Comptes idWriter;
 
-
     @ManyToOne
     @JoinColumn(name = "idcompte")
     private Comptes idCompte;
