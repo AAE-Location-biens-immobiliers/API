@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -19,8 +20,9 @@ public class AnnoncesService {
     @Autowired
     private AnnoncesRepository annoncesRepository;
 
-    public void saveAnnonce(Annonces annonces){
-        annoncesRepository.save(annonces);
+    public Annonces saveAnnonce(Annonces annonces) {
+        annonces.getDisponibilites().forEach(d -> d.setIdAnnonce(annonces));
+        return annoncesRepository.save(annonces);
     }
 
     public Set<Avis> getAllAvisWithIdAnnounce(int idAnnounce) throws Exception {
@@ -48,10 +50,8 @@ public class AnnoncesService {
         if(annonce.isEmpty()){
             throw new Exception();
         }
-        updateAnnounce.setDisponibilites(annonce.get().getDisponibilites());
-        updateAnnounce.setReservations((annonce.get().getReservations()));
         updateAnnounce.setIdHabitation(annonce.get().getIdHabitation());
-        saveAnnonce(updateAnnounce);
+        annoncesRepository.save(updateAnnounce);
     }
 
     public List<Annonces> getAllAnnoncesWithIdUser(int id) {
@@ -59,5 +59,17 @@ public class AnnoncesService {
                 .stream(annoncesRepository.findAll().spliterator(), false)
                 .filter(a -> a.getIdHabitation().getIdPersonne().getId() == id)
                 .toList();
+    }
+
+    public List<Annonces> getAll() {
+        List<Annonces> all = new LinkedList<>();
+        annoncesRepository.findAll().forEach(all::add);
+        return all;
+    }
+
+    public Annonces getById(int id) {
+        Optional<Annonces> find = annoncesRepository.findById(id);
+        if(find.isEmpty()) return null;
+        return find.get();
     }
 }

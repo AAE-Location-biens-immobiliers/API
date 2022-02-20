@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@JsonIgnoreProperties({"idWriter", "idCompte", "idLogement"})
+@JsonIgnoreProperties({"idCompte", "idLogement"})
 public class Avis {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,15 +18,15 @@ public class Avis {
     private Integer etoile;
 
     @ManyToOne
-    @JoinColumn(name = "idWriter")
+    @JoinColumn(name = "idWriter", nullable = false)
     private Comptes idWriter;
 
     @ManyToOne
-    @JoinColumn(name = "idcompte")
+    @JoinColumn(name = "idcompte", nullable = true)
     private Comptes idCompte;
 
     @ManyToOne
-    @JoinColumn(name = "idlogement")
+    @JoinColumn(name = "idlogement", nullable = true)
     private Habitations idLogement;
 
 }

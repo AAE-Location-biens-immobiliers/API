@@ -31,14 +31,6 @@ public class HabitationsService {
                 .toList();
     }
 
-    public List<Annonces> getAllAnnoncesWithIdHabitation(int idHabitations) throws Exception {
-        Optional<Habitations> habitation = habitationsRepository.findById(idHabitations);
-        if (habitation.isEmpty()){
-            throw new Exception();
-        }
-        return habitation.get().getAnnonces().stream().toList();
-    }
-
     public void modifierHabitation(@NotNull Habitations h) throws Exception {
         final Optional<Habitations> find = habitationsRepository.findById(h.getIdHabitation());
         if (find.isEmpty())
@@ -59,5 +51,13 @@ public class HabitationsService {
         personne.setId(idPersonne);
         habitation.setIdPersonne(personne);
         return habitationsRepository.save(habitation);
+    }
+
+    public List<Annonces> getAllAnnoncesWithIdHabitation(int idHabitations) throws Exception {
+        Optional<Habitations> habitation = habitationsRepository.findById(idHabitations);
+        if (habitation.isEmpty()){
+            throw new Exception();
+        }
+        return habitation.get().getAnnonces().stream().toList();
     }
 }

@@ -15,10 +15,15 @@ INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire) VALUES('3'
 INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire) VALUES('4', 'martin_password', 'Toby', 'Martin', '0602035602', 'martin.toby@yahoo.fr', true);
 INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire) VALUES('5', 'joel_password', 'Fragne', 'Joel', '0792837474', 'joel.fragne@yahoo.fr', true);
 
+INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire, photo) VALUES('6', 'admin1_password', 'prenom1', 'nom1', '0000000000', 'admin1@admin.fr', false, null);
+INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire, photo) VALUES('7', 'admin2_password', 'prenom2', 'nom2', '0000000001', 'admin2@admin.fr', false, null);
+INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire, photo) VALUES('8', 'Julien78', 'Julien', 'Raynal', '0781545409', 'julien.raynal@yahoo.fr', false, null);
+
 INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire) VALUES('6', 'admin1_password', 'prenom1', 'nom1', '0000000000', 'admin1@admin.fr', false);
 INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire) VALUES('7', 'admin2_password', 'prenom2', 'nom2', '0000000001', 'admin2@admin.fr', false);
 INSERT INTO comptes(id, password, nom, prenom, tel, email, locataire) VALUES('8', 'Julien78', 'Julien', 'Raynal', '0781545409', 'julien.raynal@yahoo.fr', false);
 
-
 INSERT INTO habitations(id_habitation, climatisation, code, cuisine, description, latitude, lave_linge, longitude, numero, parking, pays, photo, rue, seche_linge, tv, ville, wifi, id_personne) VALUES(1, false, 12345, true, 'Nice F2', '48.42288513910234', true, '-71.0668035306421',518, false, 'Canada', null, 'rue Morin', true, false, 'Chicoutimi', true, 8);
-INSERT INTO annonces(id_annonce, description, disponibilite, prix, idhabitation) VALUES(1, 'Cozy place to live', NOW(), 36.00, 1);
+INSERT INTO annonces(id_annonce, description, prix, type, nombre_place, idhabitation) VALUES(1, 'Cozy place to live', 36.00, 'Appartement', 3, 1);
+
+INSERT INTO avis(id_avis, commentaire, etoile, id_writer, idcompte, idlogement) VALUES(1, 'My first avis', 5, 8, null, 1);
