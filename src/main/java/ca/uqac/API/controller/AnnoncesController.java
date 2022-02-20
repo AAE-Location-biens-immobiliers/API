@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -22,10 +23,10 @@ public class AnnoncesController {
     private AnnoncesService annoncesService;
 
     @PostMapping("")
-    public ResponseEntity<?> add(@RequestBody Annonces annonces) {
+    public ResponseEntity<Annonces> add(@RequestBody Annonces annonces) {
         try {
-            annoncesService.saveAnnonce(annonces);
-            return new ResponseEntity<>(HttpStatus.OK);
+            final Annonces a = annoncesService.saveAnnonce(annonces);
+            return ResponseEntity.ok(a);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (Exception e) {
@@ -45,13 +46,18 @@ public class AnnoncesController {
 
 
     @GetMapping("/search")
-    public ResponseEntity<List<Annonces>> getAnnoncesSearch (@RequestParam(value = "ville") String ville, @RequestParam(value = "debut",required = false) Date debut, @RequestParam(value = "fin",required = false) Date fin, @RequestParam(value = "nbPersonne",required = false) Integer nbPersonne){
+    public ResponseEntity<List<Annonces>> getAnnoncesSearch (@RequestParam(value = "ville") String ville, @RequestParam(value = "debut",required = false) String debut, @RequestParam(value = "fin",required = false) String fin, @RequestParam(value = "nbPersonne",required = false) Integer nbPersonne){
         try {
             List<Annonces> annonces = annoncesService.search(ville);
-            if (debut != null && fin != null){
+            if (debut != null && fin != null) {
+                final Date debut_ = new SimpleDateFormat("yyyy-MM-dd").parse(debut);
+                final Date fin_ = new SimpleDateFormat("yyyy-MM-dd").parse(fin);
                 annonces = annonces.stream()
-                        .filter(a -> a.getDisponibilites().stream().anyMatch(d -> d.getDebut().equals(debut) && d.getFin().equals(fin)))
-                        .toList();
+                        .filter(a -> a.getDisponibilites().stream().anyMatch(d -> {
+                            final Date debutSQL = new Date(d.getDebut().getTime());
+                            final Date finSQL = new Date(d.getFin().getTime());
+                            return debutSQL.compareTo(debut_) <= 0 && finSQL.compareTo(fin_) >= 0;
+                        })).toList();
             }
             if(nbPersonne != null){
                 annonces = annonces.stream().filter(a -> a.getNombrePlace() == nbPersonne).toList();
@@ -74,7 +80,7 @@ public class AnnoncesController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping("/user")
     public ResponseEntity<List<Annonces>> getAllAnnoncesForIdUser(@RequestParam("id") int id){
         try {
             List<Annonces> annonces = annoncesService.getAllAnnoncesWithIdUser(id);

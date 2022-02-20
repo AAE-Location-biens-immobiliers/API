@@ -20,8 +20,9 @@ public class AnnoncesService {
     @Autowired
     private AnnoncesRepository annoncesRepository;
 
-    public void saveAnnonce(Annonces annonces){
-        annoncesRepository.save(annonces);
+    public Annonces saveAnnonce(Annonces annonces) {
+        annonces.getDisponibilites().forEach(d -> d.setIdAnnonce(annonces));
+        return annoncesRepository.save(annonces);
     }
 
     public Set<Avis> getAllAvisWithIdAnnounce(int idAnnounce) throws Exception {
@@ -49,10 +50,8 @@ public class AnnoncesService {
         if(annonce.isEmpty()){
             throw new Exception();
         }
-        updateAnnounce.setDisponibilites(annonce.get().getDisponibilites());
-        updateAnnounce.setReservations((annonce.get().getReservations()));
         updateAnnounce.setIdHabitation(annonce.get().getIdHabitation());
-        saveAnnonce(updateAnnounce);
+        annoncesRepository.save(updateAnnounce);
     }
 
     public List<Annonces> getAllAnnoncesWithIdUser(int id) {
